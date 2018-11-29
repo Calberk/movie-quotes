@@ -6,7 +6,7 @@ export default props => (
         <ol>
             <li>Brett</li>
             <li>Erick</li>
-            <li>Collin</li>
+                <li>Collin</li>
             <li>Erin</li>
             <li>Edmund</li>
         </ol>
