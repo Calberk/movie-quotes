@@ -1,12 +1,25 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {userSignIn, userSignOut} from '../actions'
+import { connect } from 'react-redux';
 
 class Nav extends Component {
+
+    renderLinks(){
+        const {auth, userSignIn, userSignOut} = this.props;
+
+        if(auth){
+            return <button onClick={userSignOut} className='purple btn'>Log Out</button>
+        }
+        return <button onClick={userSignIn} className='btn cyan darken-4'>Sign In</button>
+    }
+
     render(){
         const navStyles = {
             padding: '0 8px',
-
         }
+
+        console.log(this.props.auth)
         return (
             <nav style={navStyles} className="cyan darken-3">
                 <div className="nav-wrapper">
@@ -28,7 +41,7 @@ class Nav extends Component {
                             <Link to='/quotes'>Quotes</Link>
                         </li>
                         <li>
-                            <Link to='/sign-in'>Sign In</Link>
+                            {this.renderLinks()}
                         </li>
                         <li>
                             <Link to='/sign-up'>Sign Up</Link>
@@ -40,4 +53,14 @@ class Nav extends Component {
     }
 }
 
-export default Nav;
+function mapStateToProps(state){
+    console.log(state)
+    return{
+        auth: state.user.auth
+    }
+}
+
+export default connect(mapStateToProps, {
+    userSignIn: userSignIn,         //can just put userSignIn and userSignOut or anything to the key like signIn: userSignIn
+    userSignOut: userSignOut,
+}) (Nav);
