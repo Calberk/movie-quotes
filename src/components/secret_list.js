@@ -9,7 +9,7 @@ const SecretList = props => {
         <h1 className="center">Secret Operatives List</h1>
         <ol>
             <li>Jim</li>
-    <li>Erick</li>
+            <li>Erick</li>
             <li>Collin</li>
             <li>Erin</li>
             <li>Scott</li>
