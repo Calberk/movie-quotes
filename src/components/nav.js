@@ -1,12 +1,12 @@
 import React, {Component, Fragment} from 'react';
 import {Link} from 'react-router-dom';
-import {userSignIn, userSignOut} from '../actions'
+import {userSignOut} from '../actions'
 import { connect } from 'react-redux';
 
 class Nav extends Component {
 
     renderLinks(){
-        const {auth, userSignIn, userSignOut} = this.props;
+        const {auth, userSignOut} = this.props;
 
         if(auth){                   
             return (                            //when you are logged in/authorized these li's will show up in renderLinks
@@ -84,7 +84,6 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {
-    userSignIn: userSignIn,         //can just put userSignIn and userSignOut or anything to the key like signIn: userSignIn
+export default connect(mapStateToProps, {       //can just put userSignIn and userSignOut or anything to the key like signIn: userSignIn
     userSignOut: userSignOut,
 }) (Nav);
