@@ -1,9 +1,11 @@
 import React from 'react';
 
-export default ({input, label, meta:{error, touched}} ) => {
-    <div className='input-field'>
-        <input {...input} type='text'/>
-        <label>{label}</label>
-        <p className="red-text text-darken-2">{touched, error}</p>
-    </div>
+export default ({input, label, meta:{error, touched}, size='s12', type='text'} ) => {
+        return(
+            <div className={`input-field col ${size}`}>
+            <input {...input} id={input.name} type={type}/>
+            <label htmlFor={input.name}>{label}</label>
+            <p className="red-text text-darken-2">{touched && error}</p>
+        </div>
+        )
 }
