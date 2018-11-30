@@ -1,17 +1,46 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {Link} from 'react-router-dom';
-import {userSignIn, userSignOut} from '../actions'
+import {userSignOut} from '../actions'
 import { connect } from 'react-redux';
 
 class Nav extends Component {
 
     renderLinks(){
-        const {auth, userSignIn, userSignOut} = this.props;
+        const {auth, userSignOut} = this.props;
 
-        if(auth){
-            return <button onClick={userSignOut} className='purple btn'>Log Out</button>
+        if(auth){                   
+            return (                            //when you are logged in/authorized these li's will show up in renderLinks
+                <Fragment>
+                    <li>
+                        <Link to='/secret-list'>Secret List</Link>
+                    </li>
+                    <li>
+                        <Link to='/quotes'>Quotes</Link>
+                    </li>
+                    <li>
+                        <button onClick={userSignOut} className='purple btn'>Log Out</button>
+                    </li>
+                </Fragment>
+                    
+            
+            
+
+            )
         }
-        return <button onClick={userSignIn} className='btn cyan darken-4'>Sign In</button>
+        return (                                //when you are not authorized these li's will show up in renderLinks
+            <Fragment>
+                <li>
+                    <Link to='/sign-in'>Sign In</Link>
+                </li>
+                <li>
+                    <Link to='/sign-up'>Sign Up</Link>
+                </li>
+
+            </Fragment>
+        
+        
+    
+        )
     }
 
     render(){
@@ -34,18 +63,13 @@ class Nav extends Component {
                         <li>
                             <Link to='/public-list'>Public List</Link>
                         </li>
-                        <li>
-                            <Link to='/secret-list'>Secret List</Link>
+                        {/* <li>
+                            <Link to='/secret-list'>Secret List</Link>     TOOK OUT THIS SECTION SO IT ONLY SHOWS WHEN A USER IS AUTHORIZED
                         </li>
                         <li>
                             <Link to='/quotes'>Quotes</Link>
-                        </li>
-                        <li>
+                        </li> */}
                             {this.renderLinks()}
-                        </li>
-                        <li>
-                            <Link to='/sign-up'>Sign Up</Link>
-                        </li>
                     </ul>
                 </div>
             </nav>
@@ -60,7 +84,6 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {
-    userSignIn: userSignIn,         //can just put userSignIn and userSignOut or anything to the key like signIn: userSignIn
+export default connect(mapStateToProps, {       //can just put userSignIn and userSignOut or anything to the key like signIn: userSignIn
     userSignOut: userSignOut,
 }) (Nav);
