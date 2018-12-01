@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-export default function(WrappedComponent){   //parameter must start with a capital letter
-    
+
+export default function(WrappedComponent, to='/sign-in', requireAuth = true){   //parameter must start with a capital letter
+
     class Auth extends Component{
 
         componentDidMount(){
@@ -15,8 +16,8 @@ export default function(WrappedComponent){   //parameter must start with a capit
         }
 
         checkAuth(){
-            if(!this.props.auth){
-                this.props.history.push('/sign-in')
+            if(this.props.auth !== requireAuth){
+                this.props.history.push(to)
             }
         }
 

@@ -11,6 +11,8 @@ import Quotes from './quotes';
 import SignIn from './sign_in';
 import SignUp from './sign_up';
 
+import auth from '../hoc/auth';
+
 const App = () => (
     <div>
         <Nav/>
@@ -19,9 +21,9 @@ const App = () => (
             <Route path='/about' component= {About}/>
             <Route path = '/public-list' component = {PublicList}/>
             <Route path = '/secret-list' component = {SecretList}/>
-            <Route path = '/quotes' component = {Quotes}/>
-            <Route path = '/sign-in' component = {SignIn}/>
-            <Route path = '/sign-up' component = {SignUp}/>
+            <Route path = '/quotes' component = {auth(Quotes)}/>
+            <Route path = '/sign-in' component = {auth(SignIn, '/quotes', false)}/>
+            <Route path = '/sign-up' component = {auth(SignUp, '/quotes', false)}/>
         </div>
     </div>
 );
