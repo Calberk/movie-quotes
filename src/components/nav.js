@@ -22,12 +22,12 @@ class Nav extends Component {
                     </li>
                 </Fragment>
                     
-            
-            
-
-            )
+            );
         }
+
+        
         return (                                //when you are not authorized these li's will show up in renderLinks
+            
             <Fragment>
                 <li>
                     <Link to='/sign-in'>Sign In</Link>
@@ -38,9 +38,7 @@ class Nav extends Component {
 
             </Fragment>
         
-        
-    
-        )
+        );
     }
 
     render(){
